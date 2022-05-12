@@ -25,6 +25,7 @@ function writePassword() {
   passwordText.value = password;
 }
 
+// Generate a random password based on user chooses
 function generatePassword() {
   var passwordLength = Math.floor(
     prompt(
