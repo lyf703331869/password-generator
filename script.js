@@ -27,11 +27,13 @@ function writePassword() {
 
 // Generate a random password based on user chooses
 function generatePassword() {
+  // Ask for how many charactors from user and round to integer
   var passwordLength = Math.floor(
     prompt(
       "How long do you want the password to be? Choose a length between 8 and 128 characters"
     )
   );
+  // Check if input is number & within the range
   if (!isNaN(passwordLength) && passwordLength >= 8 && passwordLength <= 128) {
     var specialCharChose = confirm("Do you want special characters?");
     var numericalCharChose = confirm("Do you want numerical characters?");
