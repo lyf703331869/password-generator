@@ -39,6 +39,7 @@ function generatePassword() {
     var numericalCharChose = confirm("Do you want numerical characters?");
     var uppercaseCharChose = confirm("Do you want uppercase characters?");
     var lowercaseCharChose = confirm("Do you want lowercase characters?");
+    // If the format is not correct, alert user, otherwise continue
     if (
       !specialCharChose &&
       !numericalCharChose &&
@@ -50,6 +51,7 @@ function generatePassword() {
       if (wantToContinue) {
         generatePassword();
       }
+      // Create variables to store the chosen characters
     } else {
       var finalPassword = [""];
       var finalPasswordPool = "";
