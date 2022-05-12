@@ -1,5 +1,21 @@
+// WHEN I click the button to generate a password
+// THEN I am presented with a series of prompts for password criteria
+// WHEN prompted for password criteria
+// THEN I select which criteria to include in the password
+// WHEN prompted for the length of the password
+// THEN I choose a length of at least 8 characters and no more than 128 characters
+// WHEN asked for character types to include in the password
+// THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
+// WHEN I answer each prompt
+// THEN my input should be validated and at least one character type should be selected
+// WHEN all prompts are answered
+// THEN a password is generated that matches the selected criteria
+// WHEN the password is generated
+// THEN the password is either displayed in an alert or written to the page
+
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
+generateBtn.addEventListener("click", writePassword);
 
 // Write password to the #password input
 function writePassword() {
@@ -7,30 +23,67 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 function generatePassword() {
-  alert("cool");
+  var passwordLength = Math.floor(
+    prompt(
+      "How long do you want the password to be? Choose a length between 8 and 128 characters"
+    )
+  );
+  if (!isNaN(passwordLength) && passwordLength >= 8 && passwordLength <= 128) {
+    var specialCharChose = confirm("Do you want special characters?");
+    var numericalCharChose = confirm("Do you want numerical characters?");
+    var uppercaseCharChose = confirm("Do you want uppercase characters?");
+    var lowercaseCharChose = confirm("Do you want lowercase characters?");
+    if (
+      !specialCharChose &&
+      !numericalCharChose &&
+      !uppercaseCharChose &&
+      !lowercaseCharChose
+    ) {
+      alert("You have to choose at least one options!");
+      var wantToContinue = confirm("Do you still want to generate a password?");
+      if (wantToContinue) {
+        generatePassword();
+      }
+    } else {
+      var finalPassword = [""];
+      var finalPasswordPool = "";
+      var specialCharPool = "'!#$%&*+,-./:;<=>?@()[]^_`{|}~";
+      var numbersCharPool = "1234567890";
+      var upperCaseCharPool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      var lowerCaseCharPool = "abcdefghijklmnopqrstuvwxyz";
 
-  // list of special characters - !@#$%^&*()_+-
-  // list of numerical digits - 0123456789
-  // list of uppercase characters
-  // list of lowercase characters
+      if (specialCharChose) {
+        finalPasswordPool += specialCharPool;
+      }
+      if (numericalCharChose) {
+        finalPasswordPool += numbersCharPool;
+      }
+      if (uppercaseCharChose) {
+        finalPasswordPool += upperCaseCharPool;
+      }
+      if (lowercaseCharChose) {
+        finalPasswordPool += lowerCaseCharPool;
+      }
+      var finalPasswordPool = finalPasswordPool.split("");
 
-  // how many characters?
-    // is it 8 or more?
-      // no? send message
-  // use special characters?
-  // use numbers?
-  // use capital letters?
-  // use lower case letters?
+      for (var i = 0; i < passwordLength; i++) {
+        finalPassword = finalPassword.concat(
+          finalPasswordPool[
+            Math.floor(Math.random() * finalPasswordPool.length)
+          ]
+        );
+      }
 
-  // put together the password
-  // combine the lists that were chosen
-  // pick a random character from the combined list and place it in the password up the chosen length
-// Add event listener to generate button
-return;
+      return finalPassword.join("");
+    }
+  } else {
+    alert("Please choose a valid number between 8 and 128.");
+    var wantToContinue = confirm("Do you still want to generate a password?");
+    if (wantToContinue) {
+      generatePassword();
+    }
+  }
 }
-
-generateBtn.addEventListener("click", writePassword);
