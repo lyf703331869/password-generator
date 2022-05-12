@@ -60,6 +60,7 @@ function generatePassword() {
       var upperCaseCharPool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       var lowerCaseCharPool = "abcdefghijklmnopqrstuvwxyz";
 
+      // Select chosen characters into the final pool
       if (specialCharChose) {
         finalPasswordPool += specialCharPool;
       }
@@ -74,6 +75,7 @@ function generatePassword() {
       }
       var finalPasswordPool = finalPasswordPool.split("");
 
+      // Random pick out characters and concat to final pool array
       for (var i = 0; i < passwordLength; i++) {
         finalPassword = finalPassword.concat(
           finalPasswordPool[
@@ -81,9 +83,11 @@ function generatePassword() {
           ]
         );
       }
-
+      // Turn final array to string and return
       return finalPassword.join("");
     }
+
+    // If not right format, alert user and ask if user wants to continue
   } else {
     alert("Please choose a valid number between 8 and 128.");
     var wantToContinue = confirm("Do you still want to generate a password?");
